@@ -9,6 +9,9 @@ public class DropDocuments : MonoBehaviour
     [SerializeField] private Animator maxCriminalRecordAnimator;
     [SerializeField] private Animator harpFingerPrintCardAnimator;
     [SerializeField] private Animator harpCriminalRecordAnimator;
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip docComeAudioClip;
+    [SerializeField] private AudioClip docLeaveAudioClip;
     private bool documentsAreOccupied = false;
     private bool maxDocumentsOpened = false;
     private bool harpDocumentsOpened = false;
@@ -22,6 +25,8 @@ public class DropDocuments : MonoBehaviour
             maxCriminalRecordAnimator.SetBool("isMaxClicked", true);
             maxDocumentsOpened = true;
             documentsAreOccupied = true;
+
+            audioSource.PlayOneShot(docComeAudioClip);
         }
         else
         {
@@ -33,9 +38,12 @@ public class DropDocuments : MonoBehaviour
                 harpCriminalRecordAnimator.SetBool("isHarpClicked", false);
                 harpDocumentsOpened = false;
 
+                audioSource.PlayOneShot(docLeaveAudioClip);
+
                 maxFingerPrintCardAnimator.SetBool("isMaxClicked", true);
                 maxCriminalRecordAnimator.SetBool("isMaxClicked", true);
                 maxDocumentsOpened = true;
+
             }
         }
     }
@@ -46,6 +54,8 @@ public class DropDocuments : MonoBehaviour
             harpFingerPrintCardAnimator.SetBool("isHarpClicked", true);
             harpCriminalRecordAnimator.SetBool("isHarpClicked", true);
             documentsAreOccupied = true;
+
+            audioSource.PlayOneShot(docLeaveAudioClip);
         }
         else
         {
@@ -54,6 +64,8 @@ public class DropDocuments : MonoBehaviour
                 maxFingerPrintCardAnimator.SetBool("isMaxClicked", false);
                 maxCriminalRecordAnimator.SetBool("isMaxClicked", false);
                 maxDocumentsOpened = false;
+
+                audioSource.PlayOneShot(docComeAudioClip);
 
                 harpFingerPrintCardAnimator.SetBool("isHarpClicked", true);
                 harpCriminalRecordAnimator.SetBool("isHarpClicked", true);
